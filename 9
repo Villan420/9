@@ -1,87 +1,189 @@
-#include <stdio.h>
+<!DOCTYPE html>
 
-#include <stdlib.h>
+<html lang="en">
 
-#include <time.h>
+<head>
 
+ <meta charset="UTF-8">
 
-void selectionSort(int arr[], int n) {
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
- for (int i = 0; i < n - 1; i++) {
+ <title>jQuery Append, Animate, and Color Change Demo</title>
 
- int min_idx = i;
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
- for (int j = i + 1; j < n; j++) {
+ <style>
 
- if (arr[j] < arr[min_idx]) {
+ body {
 
- min_idx = j;
+ font-family: Arial, sans-serif;
 
- }
+ line-height: 1.6;
 
- }
+ margin: 0;
 
+ padding: 20px;
 
- int temp = arr[i];
+background-color: #f4f4f4;
 
- arr[i] = arr[min_idx];
+ }
 
- arr[min_idx] = temp;
+ .container {
 
- }
+ max-width: 800px;
 
-}
+ margin: auto;
 
+ background: white;
 
-void generateRandomArray(int arr[], int n) {
+ padding: 20px;
 
- srand(time(NULL));
+ border-radius: 5px;
 
- for (int i = 0; i < n; i++) {
+ box-shadow: 0 0 10px rgba(0,0,0,0.1);
 
- arr[i] = rand();
+ }
+h1, h2 {
 
- }
-}
+ color: #333;
 
-int main() {
+ }
 
- int n_values[] = {5000, 10000, 15000, 20000}; 
+ .box {
 
- int num_values = sizeof(n_values) / sizeof(n_values[0]);
+ width: 100px;
 
- double time_taken[num_values];
+ height: 100px;
 
- for (int i = 0; i < num_values; i++) {
+ background-color: #3498db;
 
- int n = n_values[i];
+ margin: 20px 0;
 
- int *arr = (int*)malloc(n * sizeof(int));
+ }
 
- generateRandomArray(arr, n);
+ button {
 
- clock_t start = clock();
+ padding: 10px 15px;
 
- selectionSort(arr, n);
+ background-color: #2ecc71;
 
- clock_t end = clock();
+ color: white;
 
- time_taken[i] = ((double)(end - start)) / CLOCKS_PER_SEC;
+ border: none;
 
- free(arr);
+ border-radius: 5px;
 
- }
+ cursor: pointer;
 
+ margin-right: 10px;
 
- printf("n\tTime Taken (s)\n");
+ }
 
- for (int i = 0; i < num_values; i++) {
+ button:hover {
 
- printf("%d\t%f\n", n_values[i], time_taken[i]);
+background-color: #27ae60;
 
- }
+ }
 
+ </style>
 
- return 0;
+</head>
 
-}
+<body>
+
+ <div class="container">
+
+ <h1>jQuery Demonstration</h1>
+
+ <h2>a. Append Content</h2>
+
+ <p id="existingParagraph">This is an existing paragraph. </p>
+
+ <ul id="existingList">
+
+ <li>Existing item 1</li>
+
+ <li>Existing item 2</li>
+
+ </ul>
+
+ <button id="appendButton">Append Content</button>
+
+ <h2>b. Animate Element</h2>
+
+ <div id="animateBox" class="box"></div>
+
+ <button id="animateButton">Animate Box</button>
+
+ <h2>c. Change Color of Animated Div</h2>
+
+ <div id="colorBox" class="box"></div>
+
+ <button id="colorAnimateButton">Animate and Change Color</button>
+
+ </div>
+
+ <script>
+
+ $(document).ready(function() {
+
+ // a. Append content
+
+ $("#appendButton").click(function() {
+
+ $("#existingParagraph").append("This content is appended.");
+
+ $("#existingList").append("<li>Appended item</li>");
+});
+
+ // b. Animate element
+
+$("#animateButton").click(function() {
+
+ $("#animateBox").animate({
+
+ width: "200px",
+
+ height: "200px",
+
+ opacity: 0.5
+
+ }, 1000);
+
+ });
+
+ // c. Animate and change color
+
+ $("#colorAnimateButton").click(function() {
+
+ $("#colorBox").animate({
+
+ width: "200px",
+
+ height: "200px"
+
+ }, {
+
+ duration: 1000,
+
+ step: function(now, fx) {
+
+ if (fx.prop === "width") {
+
+ $(this).css("background-color", `rgb(${Math.round(now)}, 52, 219)`);
+
+ }
+
+ }
+
+ });
+
+ });
+
+ });
+
+ </script>
+
+</body>
+
+</html>
